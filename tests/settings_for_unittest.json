@@ -1,0 +1,23 @@
+{
+    "version": "1.0",
+    "configurations": {
+        "security": {
+            "password_salt": "oajokkN6AkwZB4wA0XpFtzlJpYYTVB7a9JkjV56PMAs"
+        },
+        "database": {
+            "database": "ink",
+            "host": "ink.devel.keys.jp",
+            "port": 3306,
+            "user": "keys",
+            "password": "password",
+            "ssl_ca": "./ssl/ca.pem",
+            "ssl_cert": "./ssl/cert.pem",
+            "ssl_key": "./ssl/key.pem"
+        },
+        "debug": {
+            "debug_print": "yes",
+            "debug_print_level": 2,
+            "print_sql_query": "yes"
+        }
+    }
+}

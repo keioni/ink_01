@@ -1,0 +1,98 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AttrDict	../ink\sys\config.py	/^from attrdict import AttrDict$/;"	kind:namespace	line:6
+Configure	../ink\sys\config.py	/^class Configure:$/;"	kind:class	line:9
+Connector	../ink\sys\database.py	/^class Connector:$/;"	kind:class	line:6
+E0611	../ink\util\security.py	/^from hashlib import blake2b # pylint: disable=E0611$/;"	kind:namespace	line:4
+Flask	../app.py	/^from flask import Flask$/;"	kind:namespace	line:9
+Maintainer	../ink\util\database.py	/^class Maintainer:$/;"	kind:class	line:9
+Records	../ink\datastore\records.py	/^class Records:$/;"	kind:class	line:6
+TABLE_DEFS	../ink\util\database.py	/^    TABLE_DEFS = {$/;"	kind:variable	line:19
+Tokens	../ink\datastore\tokens.py	/^class Tokens:$/;"	kind:class	line:5
+Users	../ink\datastore\users.py	/^class Users:$/;"	kind:class	line:8
+__fetch	../ink\sys\database.py	/^    def __fetch(self, statement: str, fetch_type: str = 'all') -> tuple:$/;"	kind:member	line:12
+__get_defined_tables	../ink\util\database.py	/^    def __get_defined_tables(self) -> list:$/;"	kind:member	line:76
+__getattr__	../ink\sys\config.py	/^    def __getattr__(self, name):$/;"	kind:member	line:16
+__init__	../ink\datastore\records.py	/^    def __init__(self):$/;"	kind:member	line:8
+__init__	../ink\datastore\users.py	/^    def __init__(self):$/;"	kind:member	line:10
+__init__	../ink\sys\config.py	/^    def __init__(self, conf_dict: dict=None):$/;"	kind:member	line:11
+__init__	../ink\sys\database.py	/^    def __init__(self, db_connect_config: dict):$/;"	kind:member	line:8
+__init__	../ink\util\database.py	/^    def __init__(self):$/;"	kind:member	line:73
+__init__.py	../ink\__init__.py	1;"	kind:file	line:1
+__init__.py	../ink\datastore\__init__.py	1;"	kind:file	line:1
+__init__.py	../ink\sys\__init__.py	1;"	kind:file	line:1
+__init__.py	../ink\util\__init__.py	1;"	kind:file	line:1
+__repr__	../ink\sys\config.py	/^    def __repr__(self):$/;"	kind:member	line:26
+add_user	../ink\datastore\users.py	/^    def add_user(self, username: str, password: str) -> int:$/;"	kind:member	line:36
+app	../app.py	/^app = Flask(__name__)$/;"	kind:variable	line:13
+app.py	../app.py	1;"	kind:file	line:1
+auth_user	../ink\datastore\users.py	/^    def auth_user(self, username: str, password: str) -> bool:$/;"	kind:member	line:43
+b64encode	../ink\util\security.py	/^from base64 import b64encode$/;"	kind:namespace	line:5
+blake2b	../ink\util\security.py	/^from hashlib import blake2b # pylint: disable=E0611$/;"	kind:namespace	line:4
+conf	../ink\datastore\records.py	/^from ink.sys.config import conf$/;"	kind:namespace	line:3
+conf	../ink\datastore\users.py	/^from ink.sys.config import conf$/;"	kind:namespace	line:4
+conf	../ink\sys\config.py	/^conf = Configure()$/;"	kind:variable	line:50
+conf	../ink\util\database.py	/^from ink.sys.config import conf$/;"	kind:namespace	line:5
+conf	../manage.py	/^from ink.sys.config import conf$/;"	kind:namespace	line:7
+conf	../tests\test_generic.py	/^from ink.sys.config import conf$/;"	kind:namespace	line:9
+conf_file	../manage.py	/^    conf_file = '.\/var\/settings.json'$/;"	kind:variable	line:11
+conf_file	../manage.py	/^conf_file = os.environ.get('INK_CONF_FILE')$/;"	kind:variable	line:9
+config.py	../ink\sys\config.py	1;"	kind:file	line:1
+connect	../ink\sys\database.py	/^def connect(db_connect_config: dict):$/;"	kind:function	line:46
+connector	../ink\sys\database.py	/^import mysql.connector$/;"	kind:namespace	line:3
+connector	../ink\util\database.py	/^import mysql.connector$/;"	kind:namespace	line:3
+create_tables	../ink\util\database.py	/^    def create_tables(self, tables: list=None) -> bool:$/;"	kind:member	line:82
+database	../ink\datastore\records.py	/^import ink.sys.database$/;"	kind:namespace	line:4
+database	../ink\datastore\users.py	/^import ink.sys.database$/;"	kind:namespace	line:5
+database	../ink\util\database.py	/^import ink.sys.database$/;"	kind:namespace	line:6
+database.py	../ink\sys\database.py	1;"	kind:file	line:1
+database.py	../ink\util\database.py	1;"	kind:file	line:1
+delete_user	../ink\datastore\users.py	/^    def delete_user(self, user_id: int) -> bool:$/;"	kind:member	line:40
+destroy_tables	../ink\util\database.py	/^    def destroy_tables(self, tables: list=None) -> bool:$/;"	kind:member	line:90
+disable	../ink\util\security.py	/^from hashlib import blake2b # pylint: disable=E0611$/;"	kind:namespace	line:4
+execute	../ink\sys\database.py	/^    def execute(self, statements: list) -> bool:$/;"	kind:member	line:30
+fetchall	../ink\sys\database.py	/^    def fetchall(self, statement) -> tuple:$/;"	kind:member	line:27
+fetchone	../ink\sys\database.py	/^    def fetchone(self, statement) -> tuple:$/;"	kind:member	line:24
+get_all	../ink\datastore\records.py	/^def get_all():$/;"	kind:function	line:33
+get_boxes	../ink\datastore\records.py	/^    def get_boxes(self, user_id: str) -> tuple:$/;"	kind:member	line:11
+get_cards	../ink\datastore\records.py	/^    def get_cards(self, user_id: int, box_id: int) -> tuple:$/;"	kind:member	line:18
+get_records	../ink\datastore\records.py	/^    def get_records(self, card_id: int) -> tuple:$/;"	kind:member	line:25
+get_uid	../ink\datastore\users.py	/^    def get_uid(self, username: str) -> int:$/;"	kind:member	line:14
+get_username	../ink\datastore\users.py	/^    def get_username(self, user_id: int) -> str:$/;"	kind:member	line:25
+ink	../ink\datastore\records.py	/^import ink.sys.database$/;"	kind:namespace	line:4
+ink	../ink\datastore\users.py	/^import ink.sys.database$/;"	kind:namespace	line:5
+ink	../ink\util\database.py	/^import ink.sys.database$/;"	kind:namespace	line:6
+json	../ink\sys\config.py	/^import json$/;"	kind:namespace	line:4
+json	../manage.py	/^import json$/;"	kind:namespace	line:5
+load	../ink\sys\config.py	/^    def load(self, conf_file: str, force_load: bool=False):$/;"	kind:member	line:32
+manage.py	../manage.py	1;"	kind:file	line:1
+mysql	../ink\sys\database.py	/^import mysql.connector$/;"	kind:namespace	line:3
+mysql	../ink\util\database.py	/^import mysql.connector$/;"	kind:namespace	line:3
+os	../ink\sys\config.py	/^import os$/;"	kind:namespace	line:3
+os	../manage.py	/^import os$/;"	kind:namespace	line:4
+os	../tests\test_generic.py	/^import os$/;"	kind:namespace	line:3
+path_boxes	../app.py	/^def path_boxes():$/;"	kind:function	line:30
+path_cards	../app.py	/^def path_cards():$/;"	kind:function	line:34
+path_records	../app.py	/^def path_records(card_id: int):$/;"	kind:function	line:38
+path_route	../app.py	/^def path_route():$/;"	kind:function	line:17
+path_token	../app.py	/^def path_token():$/;"	kind:function	line:21
+pylint	../ink\util\security.py	/^from hashlib import blake2b # pylint: disable=E0611$/;"	kind:namespace	line:4
+pytest	../tests\test_generic.py	/^import pytest$/;"	kind:namespace	line:5
+re	../tests\test_generic.py	/^import re$/;"	kind:namespace	line:4
+records.py	../ink\datastore\records.py	1;"	kind:file	line:1
+redirect	../app.py	/^from flask import request, redirect$/;"	kind:namespace	line:10
+request	../app.py	/^from flask import request, redirect$/;"	kind:namespace	line:10
+secure_hashing	../ink\datastore\users.py	/^from ink.util.security import secure_hashing$/;"	kind:namespace	line:3
+secure_hashing	../ink\util\security.py	/^def secure_hashing(value: str, salt: str) -> str:$/;"	kind:function	line:8
+security.py	../ink\util\security.py	1;"	kind:file	line:1
+sys	../ink\datastore\records.py	/^import ink.sys.database$/;"	kind:namespace	line:4
+sys	../ink\datastore\users.py	/^import ink.sys.database$/;"	kind:namespace	line:5
+sys	../ink\util\database.py	/^import ink.sys.database$/;"	kind:namespace	line:6
+test_generic.py	../tests\test_generic.py	1;"	kind:file	line:1
+test_get_conf_value	../tests\test_generic.py	/^def test_get_conf_value():$/;"	kind:function	line:20
+tokens.py	../ink\datastore\tokens.py	1;"	kind:file	line:1
+users.py	../ink\datastore\users.py	1;"	kind:file	line:1
