@@ -29,9 +29,9 @@ class Configure:
     CONF_TREE_NAME = 'configurations'
 
     def __init__(self, conf_dict: dict = None):
-        self.__conf: dict
-        self.__conf_parts: dict
-        self.__conf_file: str
+        self.__conf = dict()
+        self.__conf_parts = dict()
+        self.__conf_file = ''
         if conf_dict:
             self.__conf = conf_dict
 
@@ -96,20 +96,15 @@ class Configure:
 
         if not conf_file:
             conf_file = self.__get_conf_filename()
-        if not conf_file:
-            msg = 'Cannot load default settings. Retry with filename.'
-            raise ValueError(msg)
+            if not conf_file:
+                msg = 'Cannot load default settings. Retry with filename.'
+                raise ValueError(msg)
+        conf = dict()
         if use_pickle:
-            pickle_file = conf_file.replace('.json', '.pickle')
-            if os.path.exists(pickle_file):
-                conf_file_mtime = os.path.getmtime(conf_file)
-                pickle_file_mtime = os.path.getmtime(pickle_file)
-                if conf_file_mtime <= pickle_file_mtime:
-                    self.unpickle(pickle_file)
-                    self.__conf_parts.clear()
-                    return True
-        with open(conf_file, 'r') as fp:
-            conf = json.load(fp)
+            conf = self.load_conf_cache_pickle(conf_file)
+        if not conf:
+            with open(conf_file, 'r') as fp:
+                conf = json.load(fp)
         if not conf:
             msg = 'Cannot load settings from: ' + conf_file
             raise ValueError(msg)
@@ -119,6 +114,18 @@ class Configure:
         self.__conf = conf
         self.__conf_parts.clear()
         return True
+
+    @classmethod
+    def load_conf_cache_pickle(cls, conf_file: str) -> dict:
+        conf = dict()
+        pickle_file = conf_file.replace('.json', '.pickle')
+        if os.path.exists(pickle_file):
+            conf_file_mtime = os.path.getmtime(conf_file)
+            pickle_file_mtime = os.path.getmtime(pickle_file)
+            if conf_file_mtime <= pickle_file_mtime:
+                with open(pickle_file, 'rb') as fpr:
+                    conf = pickle.load(fpr)
+        return conf
 
 
 CONF = Configure()
