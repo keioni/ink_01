@@ -60,7 +60,7 @@ class Configure:
             return False
         return True
 
-    def load(self, conf_file: str = None, read_pickle: bool = True):
+    def load(self, conf_file: str = None, use_pickle: bool = True):
         '''load json format setting file.
 
         Arguments:
@@ -84,7 +84,7 @@ class Configure:
             if not conf_file:
                 msg = 'Cannot load default settings. Retry with filename.'
                 raise ValueError(msg)
-        if read_pickle:
+        if use_pickle:
             pickle_file = conf_file.replace('.json', '.pickle')
             if os.path.exists(pickle_file):
                 conf_file_mtime = os.path.getmtime(conf_file)
