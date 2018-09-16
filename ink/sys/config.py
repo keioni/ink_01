@@ -78,7 +78,7 @@ class Configure:
         with open(pickle_file, 'rb') as fpr:
             self.__conf = pickle.load(fpr)
 
-    def load(self, conf_file: str = '', use_pickle: bool = True):
+    def load(self, conf_file: str = '', use_pickle: bool = True) -> bool:
         '''load json format setting file.
 
         Arguments:
