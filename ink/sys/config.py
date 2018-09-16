@@ -103,8 +103,8 @@ class Configure:
         if use_pickle:
             conf = self.load_conf_cache_pickle(conf_file)
         if not conf:
-            with open(conf_file, 'r') as fp:
-                conf = json.load(fp)
+            with open(conf_file, 'r') as fpr:
+                conf = json.load(fpr)
         if not conf:
             msg = 'Cannot load settings from: ' + conf_file
             raise ValueError(msg)
