@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "${workspaceFolder}\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Users\\Keys\\devel\\python_venv\\ink\\Scripts\\python.exe",
     "python.workspaceSymbols.ctagsPath": "C:\\Users\\Keys\\AppData\\Local\\Programs\\common\\ctags.exe",
     "python.unitTest.pyTestEnabled": true,
     "python.unitTest.pyTestArgs": [ "-v" ],
