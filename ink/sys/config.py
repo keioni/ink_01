@@ -16,6 +16,7 @@ For example:
 
 import os
 import json
+import pickle
 
 from attrdict import AttrDict
 
@@ -52,6 +53,18 @@ class Configure:
     # def __str__(self):
     #     return json.dumps(self.__conf, indent=4)
 
+    def __make_pickle(self, conf_file: str) -> bool:
+        pickle_file = conf_file.replace('.json', '.pickle')
+        pickle_file_mtime = 0
+        conf_file_mtime = os.path.getmtime(conf_file)
+        if os.path.exists(pickle_file):
+            pickle_file_mtime = os.path.getmtime(pickle_file)
+        if conf_file_mtime > pickle_file_mtime:
+            with open(pickle_file, 'wb') as fp:
+                pickle.dump(self.__conf, fp)
+                return True
+        return False
+
     def __validate_conf_dict(self, conf: dict) -> bool:
         if conf.get('version') != '1.0':
             return False
@@ -59,7 +72,7 @@ class Configure:
             return False
         return True
 
-    def load(self, conf_file: str = None):
+    def load(self, conf_file: str = None, read_pickle: bool = True):
         '''load json format setting file.
 
         Arguments:
@@ -83,8 +96,18 @@ class Configure:
             if not conf_file:
                 msg = 'Cannot load default settings. Retry with filename.'
                 raise ValueError(msg)
-        with open(conf_file, 'r') as f:
-            conf = json.load(f)
+        if read_pickle:
+            pickle_file = conf_file.replace('.json', '.pickle')
+            if os.path.exists(pickle_file):
+                conf_file_mtime = os.path.getmtime(conf_file)
+                pickle_file_mtime = os.path.getmtime(pickle_file)
+                if conf_file_mtime <= pickle_file_mtime:
+                    with open(pickle_file, 'rb') as fp:
+                        self.__conf = pickle.load(fp)
+                    self.__conf_parts.clear()
+                    return True
+        with open(conf_file, 'r') as fp:
+            conf = json.load(fp)
         if not conf:
             msg = 'Cannot load settings from: ' + conf_file
             raise ValueError(msg)
@@ -93,6 +116,7 @@ class Configure:
             raise ValueError(msg)
         self.__conf = conf
         self.__conf_parts.clear()
+        self.__make_pickle(conf_file)
         return True
 
 
