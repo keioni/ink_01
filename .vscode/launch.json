@@ -8,7 +8,7 @@
             "name": "Python: manager",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/manage.py",
+            "program": "${workspaceFolder}/manage.py",
             "env": {
                 "INK_CONF_FILE": "${workspaceFolder}/var/settings.json"
             }
