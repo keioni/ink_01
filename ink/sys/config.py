@@ -61,6 +61,15 @@ class Configure:
             return False
         return True
 
+    def __get_conf_filename(self) -> str:
+        conf_file = ''
+        if 'INK_CONF_FILE' in os.environ:
+            conf_file = os.environ.get('INK_CONF_FILE')
+        else:
+            conf_dir = os.path.dirname(__file__) + '/../..'
+            conf_file = os.path.abspath(conf_dir + '/var/settings.json')
+        return conf_file
+
     def pickle(self, pickle_file: str):
         with open(pickle_file, 'wb') as fpw:
             pickle.dump(self.__conf, fpw)
@@ -69,8 +78,7 @@ class Configure:
         with open(pickle_file, 'rb') as fpr:
             self.__conf = pickle.load(fpr)
 
-
-    def load(self, conf_file: str = None, use_pickle: bool = True):
+    def load(self, conf_file: str = '', use_pickle: bool = True):
         '''load json format setting file.
 
         Arguments:
@@ -87,13 +95,10 @@ class Configure:
         '''
 
         if not conf_file:
-            conf_file = os.environ.get('INK_CONF_FILE')
-            if not conf_file:
-                conf_dir = os.path.dirname(__file__) + '/../..'
-                conf_file = os.path.abspath(conf_dir + '/var/settings.json')
-            if not conf_file:
-                msg = 'Cannot load default settings. Retry with filename.'
-                raise ValueError(msg)
+            conf_file = self.__get_conf_filename()
+        if not conf_file:
+            msg = 'Cannot load default settings. Retry with filename.'
+            raise ValueError(msg)
         if use_pickle:
             pickle_file = conf_file.replace('.json', '.pickle')
             if os.path.exists(pickle_file):
