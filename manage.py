@@ -9,7 +9,8 @@ def hoge1():
     conf_file = os.environ.get('INK_CONF_FILE')
     if not conf_file:
         conf_file = './var/settings.json'
-    CONF.load(conf_file, True)
+    CONF.load()
+#    CONF.load(conf_file)
     print(CONF)
     print(CONF.database)
     print(CONF.database.host)

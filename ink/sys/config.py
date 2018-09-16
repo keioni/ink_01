@@ -25,30 +25,26 @@ class Configure:
 
     How to use this class, see module docstring.
     '''
-
+    CONF_TREE_NAME = 'configurations'
 
     def __init__(self, conf_dict: dict = None):
         self.__conf = {}
-        self.__files = []
+        self.__conf_parts = {}
         if conf_dict:
             self.__conf = conf_dict
-        else:
-            conf_dir = __file__ + '../../..'
-            conf_file = os.path.abspath(conf_dir + '/var/settings.json')
-            if os.path.exists(conf_file):
-                with open(conf_file, 'r') as f:
-                    self.__conf = json.load(f)
-                self.__files.append(conf_file)
 
     def __getattr__(self, name):
         if not self.__conf:
             msg = 'Setting file does not loaded.'
             raise AttributeError(msg)
-        values = self.__conf['configurations'].get(name)
-        if values:
-            return AttrDict(values)
-        msg = 'No configuration values of name: {}'.format(name)
-        raise AttributeError(msg)
+        if name not in self.__conf_parts:
+            part = self.__conf[self.CONF_TREE_NAME].get(name)
+            if part:
+                self.__conf_parts[name] = AttrDict(part)
+            else:
+                msg = 'No configuration part: {}'.format(name)
+                raise AttributeError(msg)
+        return self.__conf_parts[name]
 
     def __repr__(self):
         return '{}({})'.format(self.__class__.__name__, self.__conf)
@@ -56,7 +52,14 @@ class Configure:
     # def __str__(self):
     #     return json.dumps(self.__conf, indent=4)
 
-    def load(self, conf_file: str, force_load: bool = False):
+    def __validate_conf_dict(self, conf: dict) -> bool:
+        if conf.get('version') != '1.0':
+            return False
+        if self.CONF_TREE_NAME not in conf:
+            return False
+        return True
+
+    def load(self, conf_file: str = None):
         '''load json format setting file.
 
         Arguments:
@@ -72,28 +75,25 @@ class Configure:
             returning {False}. So use try-except.
         '''
 
-        if self.__conf:
-            if not force_load:
-                msg = 'Always loaded.'
+        if not conf_file:
+            conf_file = os.environ.get('INK_CONF_FILE')
+            if not conf_file:
+                conf_dir = os.path.dirname(__file__) + '/../..'
+                conf_file = os.path.abspath(conf_dir + '/var/settings.json')
+            if not conf_file:
+                msg = 'Cannot load default settings. Retry with filename.'
                 raise ValueError(msg)
         with open(conf_file, 'r') as f:
-            self.__conf = json.load(f)
-        if not self.__conf:
-            msg = 'Cannot load system settings from the file.'
+            conf = json.load(f)
+        if not conf:
+            msg = 'Cannot load settings from: ' + conf_file
             raise ValueError(msg)
-        if self.__conf.get('version') != '1.0':
-            msg = 'Version number does not exist or not match this system.'
+        if not self.__validate_conf_dict(conf):
+            msg = 'Invalid format file: ' + conf_file
             raise ValueError(msg)
-        if not self.__conf.get('configurations'):
-            msg = "Setting file's format is invalid."
-            raise ValueError(msg)
+        self.__conf = conf
+        self.__conf_parts.clear()
         return True
-
-    def is_loaded(self) -> bool:
-        return bool(self.__conf)
-
-    def clear(self):
-        self.__conf.clear()
 
 
 CONF = Configure()
