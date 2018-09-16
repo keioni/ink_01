@@ -129,19 +129,3 @@ class Configure:
 
 
 CONF = Configure()
-
-# conf = AttrDict()
-
-# conf_file = os.environ.get('INK_CONF_FILE')
-# if not conf_file:
-#     conf_file = './var/settings.json'
-
-# with open(conf_file, 'r') as f:
-#     raw_conf = json.load(f)
-# if not raw_conf:
-#     msg = 'Cannot load system settings from the file.'
-#     raise ValueError(msg)
-# if raw_conf.get('version') != '1.0':
-#     msg = 'Version number does not exist or not match this system.'
-#     raise ValueError(msg)
-# conf = AttrDict(raw_conf.get('configurations'))
