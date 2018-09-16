@@ -12,7 +12,6 @@
     "editor.wordWrapColumn": 80,
     "editor.wrappingIndent": "none",
     "editor.find.autoFindInSelection": true,
-    "editor.links": true,
     "editor.snippetSuggestions": "inline",
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
