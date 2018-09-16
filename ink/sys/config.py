@@ -29,8 +29,9 @@ class Configure:
     CONF_TREE_NAME = 'configurations'
 
     def __init__(self, conf_dict: dict = None):
-        self.__conf = {}
-        self.__conf_parts = {}
+        self.__conf: dict
+        self.__conf_parts: dict
+        self.__conf_file: str
         if conf_dict:
             self.__conf = conf_dict
 
@@ -59,6 +60,15 @@ class Configure:
         if self.CONF_TREE_NAME not in conf:
             return False
         return True
+
+    def pickle(self, pickle_file: str):
+        with open(pickle_file, 'wb') as fpw:
+            pickle.dump(self.__conf, fpw)
+
+    def unpickle(self, pickle_file: str):
+        with open(pickle_file, 'rb') as fpr:
+            self.__conf = pickle.load(fpr)
+
 
     def load(self, conf_file: str = None, use_pickle: bool = True):
         '''load json format setting file.
@@ -90,8 +100,7 @@ class Configure:
                 conf_file_mtime = os.path.getmtime(conf_file)
                 pickle_file_mtime = os.path.getmtime(pickle_file)
                 if conf_file_mtime <= pickle_file_mtime:
-                    with open(pickle_file, 'rb') as fp:
-                        self.__conf = pickle.load(fp)
+                    self.unpickle(pickle_file)
                     self.__conf_parts.clear()
                     return True
         with open(conf_file, 'r') as fp:
