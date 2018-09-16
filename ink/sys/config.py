@@ -35,6 +35,12 @@ class Configure:
     #     if conf_dict:
     #         self.__conf = conf_dict
 
+    # def __repr__(self):
+    #     return '{}({})'.format(self.__class__.__name__, self.__conf)
+
+    # def __str__(self):
+    #     return json.dumps(self.__conf, indent=4)
+
     def __init__(self):
         self.__conf = dict()
         self.__conf_parts = dict()
@@ -52,12 +58,6 @@ class Configure:
                 msg = 'No configuration part: {}'.format(name)
                 raise AttributeError(msg)
         return self.__conf_parts[name]
-
-    # def __repr__(self):
-    #     return '{}({})'.format(self.__class__.__name__, self.__conf)
-
-    # def __str__(self):
-    #     return json.dumps(self.__conf, indent=4)
 
     def __validate_conf_dict(self, conf: dict) -> bool:
         if conf.get('version') != '1.0':
