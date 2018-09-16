@@ -28,12 +28,17 @@ class Configure:
     '''
     CONF_TREE_NAME = 'configurations'
 
-    def __init__(self, conf_dict: dict = None):
+    # def __init__(self, conf_dict: dict = None):
+    #     self.__conf = dict()
+    #     self.__conf_parts = dict()
+    #     self.__conf_file = ''
+    #     if conf_dict:
+    #         self.__conf = conf_dict
+
+    def __init__(self):
         self.__conf = dict()
         self.__conf_parts = dict()
         self.__conf_file = ''
-        if conf_dict:
-            self.__conf = conf_dict
 
     def __getattr__(self, name):
         if not self.__conf:
@@ -48,8 +53,8 @@ class Configure:
                 raise AttributeError(msg)
         return self.__conf_parts[name]
 
-    def __repr__(self):
-        return '{}({})'.format(self.__class__.__name__, self.__conf)
+    # def __repr__(self):
+    #     return '{}({})'.format(self.__class__.__name__, self.__conf)
 
     # def __str__(self):
     #     return json.dumps(self.__conf, indent=4)
