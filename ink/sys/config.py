@@ -53,18 +53,6 @@ class Configure:
     # def __str__(self):
     #     return json.dumps(self.__conf, indent=4)
 
-    def __make_pickle(self, conf_file: str) -> bool:
-        pickle_file = conf_file.replace('.json', '.pickle')
-        pickle_file_mtime = 0
-        conf_file_mtime = os.path.getmtime(conf_file)
-        if os.path.exists(pickle_file):
-            pickle_file_mtime = os.path.getmtime(pickle_file)
-        if conf_file_mtime > pickle_file_mtime:
-            with open(pickle_file, 'wb') as fp:
-                pickle.dump(self.__conf, fp)
-                return True
-        return False
-
     def __validate_conf_dict(self, conf: dict) -> bool:
         if conf.get('version') != '1.0':
             return False
@@ -116,7 +104,6 @@ class Configure:
             raise ValueError(msg)
         self.__conf = conf
         self.__conf_parts.clear()
-        self.__make_pickle(conf_file)
         return True
 
 
