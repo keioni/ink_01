@@ -26,7 +26,7 @@ class Configure:
 
     How to use this class, see module docstring.
     '''
-    CONF_TREE_NAME = 'configurations'
+    CONF_TREE_TOP_NAME = 'configurations'
 
     # def __init__(self, conf_dict: dict = None):
     #     self.__conf = dict()
@@ -51,7 +51,7 @@ class Configure:
             msg = 'Setting file does not loaded.'
             raise AttributeError(msg)
         if name not in self.__conf_parts:
-            part = self.__conf[self.CONF_TREE_NAME].get(name)
+            part = self.__conf[self.CONF_TREE_TOP_NAME].get(name)
             if part:
                 self.__conf_parts[name] = AttrDict(part)
             else:
@@ -62,7 +62,7 @@ class Configure:
     def __validate_conf_dict(self, conf: dict) -> bool:
         if conf.get('version') != '1.0':
             return False
-        if self.CONF_TREE_NAME not in conf:
+        if self.CONF_TREE_TOP_NAME not in conf:
             return False
         return True
 
