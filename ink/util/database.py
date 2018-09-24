@@ -2,7 +2,7 @@
 
 import mysql.connector
 
-from ink.sys.config import conf
+from ink.sys.config import CONF
 import ink.sys.database
 
 
@@ -71,7 +71,7 @@ class Maintainer:
     }
 
     def __init__(self):
-        self.dbc = ink.sys.database.connect()
+        self.dbc = ink.sys.database.connect(CONF.database)
 
     def __get_defined_tables(self) -> list:
         tables = list()
