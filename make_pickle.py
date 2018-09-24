@@ -12,6 +12,7 @@ import pickle
 import json
 import sys
 
+
 def pickle_maker():
     '''pickle_maker body
     '''
@@ -26,8 +27,8 @@ def pickle_maker():
         if 'INK_CONF_FILE' in os.environ:
             conf_file = os.environ.get('INK_CONF_FILE')
         else:
-            conf_dir = os.path.dirname(__file__)
-            conf_file = os.path.abspath(conf_dir + '/var/settings.json')
+            d = os.path.dirname(__file__)
+            conf_file = os.path.abspath(d + '/var/settings.json')
 
     # get destination file name (.pickle)
     if len(sys.argv) > 2:
