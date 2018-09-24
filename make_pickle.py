@@ -45,5 +45,6 @@ def pickle_maker():
     print('Pickle file: {}'.format(pickle_file))
 
 if __name__ == '__main__':
-    print('== Pickle Maker ==')
+    print('>> Pickle Maker starting...')
     pickle_maker()
+    print('>> Pickle Maker finished.')
