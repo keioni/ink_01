@@ -1,18 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+'''Pickle Maker
+
+Convert raw, readable, and formatted config file (json) to
+Python independed 'pickle' file.
+'''
+
 
 import os
 import pickle
 import json
 import sys
 
+def pickle_maker():
+    '''pickle_maker body
+    '''
 
-if __name__ == '__main__':
-    print('== Pickle Maker ==')
     conf_file = ''
     pickle_file = ''
 
-    # get source file (.json)
+    # get source file name (.json)
     if len(sys.argv) > 1:
         conf_file = sys.argv[1]
     else:
@@ -22,7 +29,7 @@ if __name__ == '__main__':
             conf_dir = os.path.dirname(__file__)
             conf_file = os.path.abspath(conf_dir + '/var/settings.json')
 
-    # get destination file (.pickle)
+    # get destination file name (.pickle)
     if len(sys.argv) > 2:
         pickle_file = sys.argv[2]
     else:
@@ -35,3 +42,7 @@ if __name__ == '__main__':
     with open(pickle_file, 'wb') as fpw:
         pickle.dump(conf, fpw)
     print('Pickle file: {}'.format(pickle_file))
+
+if __name__ == '__main__':
+    print('== Pickle Maker ==')
+    pickle_maker()
