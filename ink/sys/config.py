@@ -44,7 +44,6 @@ class Configure:
     def __init__(self):
         self.__conf = dict()
         self.__conf_parts = dict()
-        self.__conf_file = ''
 
     def __getattr__(self, name):
         if not self.__conf:
