@@ -74,13 +74,13 @@ class Configure:
             conf_file = os.path.abspath(conf_dir + '/var/settings.json')
         return conf_file
 
-    def pickle(self, pickle_file: str):
-        with open(pickle_file, 'wb') as fpw:
-            pickle.dump(self.__conf, fpw)
+    # def pickle(self, pickle_file: str):
+    #     with open(pickle_file, 'wb') as fpw:
+    #         pickle.dump(self.__conf, fpw)
 
-    def unpickle(self, pickle_file: str):
-        with open(pickle_file, 'rb') as fpr:
-            self.__conf = pickle.load(fpr)
+    # def unpickle(self, pickle_file: str):
+    #     with open(pickle_file, 'rb') as fpr:
+    #         self.__conf = pickle.load(fpr)
 
     def load(self, conf_file: str = '', use_pickle: bool = True) -> bool:
         '''load json format setting file.
