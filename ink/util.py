@@ -32,6 +32,7 @@ class DBMaintainer:
     '''
 
     def __init__(self, dry_run: bool = False):
+        self.dry_run = dry_run
         if dry_run:
             self.dbc = Connector(CONF.database.connect_string)
 
@@ -43,6 +44,7 @@ class DBMaintainer:
             table_name = str()
             lines = list()
             for line in fpr:
+                line = line.strip()
                 # remove comment
                 comment_start = line.find('--')
                 if comment_start >= 0:
@@ -52,7 +54,7 @@ class DBMaintainer:
                 if line == '':
                     if table_name:
                         # end of table definition.
-                        tables[table_name] = ' '.join(lines).strip()
+                        tables[table_name] = ' '.join(lines)
                         lines.clear()
                         table_name = ''
                 else:
@@ -65,7 +67,7 @@ class DBMaintainer:
                         table_name = stmt_begin.group(1)
 
                 if table_name:
-                    lines.append(line.strip())
+                    lines.append(line)
         return tables
 
     def create_tables(self, tables: dict = None) -> bool:
