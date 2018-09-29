@@ -15,7 +15,7 @@
                 "ssl_cert": "./ssl/cert.pem",
                 "ssl_key": "./ssl/key.pem"
             },
-            "schema_file": "table_schema.sql",
+            "schema_file": "var/table_schema.sql"
         },
         "debug": {
             "debug_print": "yes",

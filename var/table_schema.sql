@@ -15,6 +15,7 @@ create table users (
     primary key (token),
 )
 
+-- select * from boxes where user_id=$UID
 create table boxes (
     box_id integer auto_increment,
     user_id integer,
@@ -25,6 +26,8 @@ create table boxes (
     index index_user (user_id),
 )
 
+-- select * from cards where user_id=$UID
+-- select * from cards where user_id=$UID and box_id=$BID
 create table cards (
     card_id integer auto_increment,
     box_id integer,
@@ -37,6 +40,7 @@ create table cards (
     index index_user_box (user_id, box_id),
 )
 
+-- select record from records where card_id=$CID
 create table records (
     rowid integer auto_increment,
     card_id integer,

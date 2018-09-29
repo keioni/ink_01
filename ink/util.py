@@ -11,7 +11,7 @@ from base64 import b64encode
 import mysql.connector
 
 from ink.sys.config import CONF
-import ink.sys.database
+from ink.sys.database import Connector
 
 
 def vp(msg: str):
@@ -31,22 +31,20 @@ class DBMaintainer:
     INK System Database Maintainer
     '''
 
-    # select * from boxes where user_id=$UID
-    # select * from cards where user_id=$UID
-    # select * from cards where user_id=$UID and box_id=$BID
-    # select record from records where card_id=$CID
+    def __init__(self, dry_run: bool = False):
+        if dry_run:
+            self.dbc = Connector(CONF.database.connect_string)
 
-    def __init__(self):
-        self.dbc = ink.sys.database.connect(CONF.database.connect_string)
-
-    def __get_defined_tables(self) -> dict:
+    def get_defined_tables(self, schema_file: str = '') -> dict:
         tables = dict()
-        with open(CONF.database.schema_file, 'r') as fpr:
+        if not schema_file:
+            schema_file = CONF.database.schema_file
+        with open(schema_file, 'r') as fpr:
             table_name = str()
             lines = list()
             for line in fpr:
                 # remove comment
-                comment_start = line.find('#')
+                comment_start = line.find('--')
                 if comment_start >= 0:
                     line = line[:comment_start]
 
@@ -54,7 +52,7 @@ class DBMaintainer:
                 if line == '':
                     if table_name:
                         # end of table definition.
-                        tables[table_name] = ' '.join(lines)
+                        tables[table_name] = ' '.join(lines).strip()
                         lines.clear()
                         table_name = ''
                 else:
@@ -64,15 +62,15 @@ class DBMaintainer:
                         if table_name:
                             tables[table_name] = ' '.join(lines)
                             lines.clear()
-                        table_name = stmt_begin.group(0)
+                        table_name = stmt_begin.group(1)
 
                 if table_name:
-                    lines.append(line)
+                    lines.append(line.strip())
         return tables
 
     def create_tables(self, tables: dict = None) -> bool:
         if not tables:
-            tables = self.__get_defined_tables()
+            tables = self.get_defined_tables()
         statements = list()
         for table_name in tables.keys():
             statements.append(tables[table_name])
@@ -80,7 +78,7 @@ class DBMaintainer:
 
     def destroy_tables(self, tables: dict = None) -> bool:
         if not tables:
-            tables = self.__get_defined_tables()
+            tables = self.get_defined_tables()
         statements = list()
         for table_name in tables.keys():
             statements.append('drop table {}'.format(table_name))
