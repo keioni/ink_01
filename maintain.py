@@ -25,14 +25,6 @@ if __name__ == '__main__':
         dbm = ink.util.DBMaintainer(False)
         tables = dbm.get_defined_tables()
         print(json.dumps(tables, indent=4))
-    elif cmd == 't_dbm':
-        dbm = ink.util.DBMaintainer(False)
-        tables = dbm.get_defined_tables('tests/test_table_schema.sql')
-        cur_digest = ink.util.generate_digest(str(tables))
-
-        json_str = str(json.dumps(tables, indent=4))
-        print(json_str)
-        print(ink.util.generate_digest(json_str))
     elif cmd == 'cc':
         print(CONF)
         print(CONF.database)

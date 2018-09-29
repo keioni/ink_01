@@ -115,23 +115,6 @@ def make_pickle(conf_file: str = '', pickle_file: str = ''):
     print('Pickle file: {}'.format(pickle_file))
 
 
-def generate_digest(value: str) -> str:
-    '''Digest Generator
-
-    Mainly used for testing convertion check
-    like as SQL schema file to dict.
-
-    Arguments:
-        value {str} -- source string
-
-    Returns:
-        str -- digest of the source (sha256)
-    '''
-    h = hashlib.sha256()
-    h.update(value.encode('utf-8'))
-    return h.hexdigest()
-
-
 def secure_hash(value: str, salt: str) -> str:
     '''
     Secure Hash Function
