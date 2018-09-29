@@ -5,14 +5,17 @@
             "password_salt": "oajokkN6AkwZB4wA0XpFtzlJpYYTVB7a9JkjV56PMAs"
         },
         "database": {
-            "database": "ink",
-            "host": "ink.devel.keys.jp",
-            "port": 3306,
-            "user": "keys",
-            "password": "password",
-            "ssl_ca": "./ssl/ca.pem",
-            "ssl_cert": "./ssl/cert.pem",
-            "ssl_key": "./ssl/key.pem"
+            "connect_string": {
+                "database": "ink",
+                "host": "ink.devel.keys.jp",
+                "port": 3306,
+                "user": "keys",
+                "password": "password",
+                "ssl_ca": "./ssl/ca.pem",
+                "ssl_cert": "./ssl/cert.pem",
+                "ssl_key": "./ssl/key.pem"
+            },
+            "schema_file": "table_schema.sql",
         },
         "debug": {
             "debug_print": "yes",
