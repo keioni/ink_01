@@ -5,7 +5,7 @@ import pickle
 import json
 import sys
 import re
-from hashlib import blake2b
+import hashlib
 from base64 import b64encode
 
 import mysql.connector
@@ -115,6 +115,23 @@ def make_pickle(conf_file: str = '', pickle_file: str = ''):
     print('Pickle file: {}'.format(pickle_file))
 
 
+def generate_digest(value: str) -> str:
+    '''Digest Generator
+
+    Mainly used for testing convertion check
+    like as SQL schema file to dict.
+
+    Arguments:
+        value {str} -- source string
+
+    Returns:
+        str -- digest of the source (sha256)
+    '''
+    h = hashlib.sha256()
+    h.update(value.encode('utf-8'))
+    return h.hexdigest()
+
+
 def secure_hash(value: str, salt: str) -> str:
     '''
     Secure Hash Function
@@ -125,6 +142,6 @@ def secure_hash(value: str, salt: str) -> str:
 
     salt = salt.encode('utf-8')
     # https://github.com/PyCQA/pylint/issues/2478
-    h = blake2b(key=salt, digest_size=32) # pylint: disable=E1123
+    h = hashlib.blake2b(key=salt, digest_size=32) # pylint: disable=E1123
     h.update(value.encode('utf-8'))
     return b64encode(h.digest()).decode()
