@@ -47,23 +47,24 @@ class DBMaintainer:
                 # remove comment
                 comment_start = line.find('--')
                 if comment_start >= 0:
-                    line = line[:comment_start]
+                    line = line[:comment_start].strip()
+                line = line.strip()
 
                 # check blank line or not.
                 if line == '':
                     if table_name:
                         # end of table definition.
-                        tables[table_name] = ' '.join(lines)
+                        tables[table_name] = ''.join(lines)
                         lines.clear()
                         table_name = ''
+                    continue
                 else:
                     # start of table definition
-                    line = line.strip()
                     stmt_begin = re.match(r'create table (\w+)', line)
                     if stmt_begin:
-                        if table_name:
-                            tables[table_name] = ' '.join(lines)
-                            lines.clear()
+                        # if table_name:
+                        #     tables[table_name] = ' '.join(lines)
+                        #     lines.clear()
                         table_name = stmt_begin.group(1)
 
                 if table_name:

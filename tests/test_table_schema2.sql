@@ -25,7 +25,6 @@ create table users ( -- comment
 )
 ;
 
--- select * from boxes where user_id=$UID
 create table boxes (
     box_id integer auto_increment,
     user_id integer,
@@ -34,8 +33,7 @@ create table boxes (
     mtime datetime,
     primary key (box_id),
     index index_user (user_id),
-)
-;
+);
 
 -- select * from cards where user_id=$UID
 -- select * from cards where user_id=$UID and box_id=$BID
