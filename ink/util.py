@@ -31,9 +31,8 @@ class DBMaintainer:
     INK System Database Maintainer
     '''
 
-    def __init__(self, dry_run: bool = False):
-        self.dry_run = dry_run
-        if dry_run:
+    def __init__(self, connector = None):
+        if not connector:
             self.dbc = Connector(CONF.database.connect_string)
 
     def get_defined_tables(self, schema_file: str = '') -> dict:
@@ -84,7 +83,7 @@ class DBMaintainer:
             tables = self.get_defined_tables()
         statements = list()
         for table_name in tables.keys():
-            statements.append('drop table {}'.format(table_name))
+            statements.append('drop table {};'.format(table_name))
         return self.dbc.execute(statements)
 
 

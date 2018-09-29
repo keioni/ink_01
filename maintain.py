@@ -8,6 +8,15 @@ import hashlib
 
 import ink.util
 from ink.sys.config import CONF
+from ink.sys.database import Connector
+
+
+class ConnectorMock:
+
+    def execute(self, statements: list):
+        for stmt in statements:
+            print('execute> ' + stmt )
+
 
 if __name__ == '__main__':
     CONF.load()
@@ -22,11 +31,19 @@ if __name__ == '__main__':
         ink.util.make_pickle(args.get(0), args.get(1))
         print('>> Pickle Maker finished.')
     elif cmd == 'dbm':
-        dbm = ink.util.DBMaintainer(False)
+        if args.get(0, 'dry') == 'run':
+            db_connector = Connector(CONF.database.connect_string)
+        else:
+            db_connector = ConnectorMock()
+        dbm = ink.util.DBMaintainer(db_connector)
         tables = dbm.get_defined_tables()
         print(json.dumps(tables, indent=4))
     elif cmd == 't_dbm':
-        dbm = ink.util.DBMaintainer(False)
+        if args.get(0, 'dry') == 'run':
+            db_connector = Connector(CONF.database.connect_string)
+        else:
+            db_connector = ConnectorMock()
+        dbm = ink.util.DBMaintainer(db_connector)
         tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
         tables2 = dbm.get_defined_tables('tests/test_table_schema2.sql')
         print(json.dumps(tables1, indent=4))

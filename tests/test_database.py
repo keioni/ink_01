@@ -5,9 +5,16 @@ import json
 
 import ink.util
 
+class ConnectorMock:
+
+    def execute(self, statements: list):
+        for stmt in statements:
+            print('execute> ' + stmt )
+
 
 def test_read_sql_file():
-    dbm = ink.util.DBMaintainer(False)
+    db_connector = ConnectorMock()
+    dbm = ink.util.DBMaintainer(db_connector)
     tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
     tables2 = dbm.get_defined_tables('tests/test_table_schema2.sql')
 
