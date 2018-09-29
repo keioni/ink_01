@@ -39,8 +39,8 @@ class DBMaintainer:
     def __init__(self):
         self.dbc = ink.sys.database.connect(CONF.database.connect_string)
 
-    def __get_defined_tables(self) -> list:
-        table_dict = dict()
+    def __get_defined_tables(self) -> dict:
+        tables = dict()
         with open(CONF.database.schema_file, 'r') as fpr:
             table_name = str()
             lines = list()
@@ -54,7 +54,7 @@ class DBMaintainer:
                 if line == '':
                     if table_name:
                         # end of table definition.
-                        table_dict[table_name] = ' '.join(lines)
+                        tables[table_name] = ' '.join(lines)
                         lines.clear()
                         table_name = ''
                 else:
@@ -62,20 +62,15 @@ class DBMaintainer:
                     stmt_begin = re.match(r'create table (\w+)', line)
                     if stmt_begin:
                         if table_name:
-                            table_dict[table_name] = ' '.join(lines)
+                            tables[table_name] = ' '.join(lines)
                             lines.clear()
                         table_name = stmt_begin.group(0)
 
                 if table_name:
                     lines.append(line)
+        return tables
 
-            table_list = list()
-            for statement in table_dict.values():
-                table_list.append(statement)
-
-        return table_list
-
-    def create_tables(self, tables: dict=None) -> bool:
+    def create_tables(self, tables: dict = None) -> bool:
         if not tables:
             tables = self.__get_defined_tables()
         statements = list()
@@ -83,7 +78,7 @@ class DBMaintainer:
             statements.append(tables[table_name])
         return self.dbc.execute(statements)
 
-    def destroy_tables(self, tables: dict=None) -> bool:
+    def destroy_tables(self, tables: dict = None) -> bool:
         if not tables:
             tables = self.__get_defined_tables()
         statements = list()
