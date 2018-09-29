@@ -25,6 +25,12 @@ if __name__ == '__main__':
         dbm = ink.util.DBMaintainer(False)
         tables = dbm.get_defined_tables()
         print(json.dumps(tables, indent=4))
+    elif cmd == 't_dbm':
+        dbm = ink.util.DBMaintainer(False)
+        tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
+        tables2 = dbm.get_defined_tables('tests/test_table_schema2.sql')
+        print(json.dumps(tables1, indent=4))
+        print(json.dumps(tables2, indent=4))
     elif cmd == 'cc':
         print(CONF)
         print(CONF.database)

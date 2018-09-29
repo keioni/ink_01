@@ -5,6 +5,7 @@ import json
 
 import ink.util
 
+
 def test_read_sql_file():
     dbm = ink.util.DBMaintainer(False)
     tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
@@ -15,5 +16,5 @@ def test_read_sql_file():
     dig1 = h1.hexdigest()
     h2 = hashlib.sha256()
     h2.update(str(tables2).encode('utf-8'))
-    dig2 = h1.hexdigest()
+    dig2 = h2.hexdigest()
     assert dig1 == dig2

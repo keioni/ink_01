@@ -1,16 +1,24 @@
+-- Test SQL reading and coverting system
+-- used in pytest (tests/test_database.py)
 
-create table tokens (
+--
+
+
+-- format does not match correctly,
+-- but there are the same
+        create table tokens (
     rowid integer auto_increment,
-    token bigint,
-    user_id integer,
-    ctime datetime not null,
-    primary key (token),
+                                token bigint,
+user_id integer,
+        ctime datetime not null,
+                        primary key (token),
 )
 ;
 
-create table users (
-    rowid integer auto_increment,
-    token bigint,
+-- inline comment
+create table users ( -- comment
+    rowid integer auto_increment,       -- comment comment
+    token bigint,--comment
     user_id integer,
     ctime datetime not null,
     primary key (token),

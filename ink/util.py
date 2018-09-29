@@ -44,7 +44,6 @@ class DBMaintainer:
             table_name = str()
             lines = list()
             for line in fpr:
-                line = line.strip()
                 # remove comment
                 comment_start = line.find('--')
                 if comment_start >= 0:
@@ -59,6 +58,7 @@ class DBMaintainer:
                         table_name = ''
                 else:
                     # start of table definition
+                    line = line.strip()
                     stmt_begin = re.match(r'create table (\w+)', line)
                     if stmt_begin:
                         if table_name:
