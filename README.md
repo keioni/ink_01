@@ -1,3 +1,3 @@
-# INK mock
+# INK System backend mock
 
 Practice for Python.
