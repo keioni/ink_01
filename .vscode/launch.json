@@ -5,13 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: manager",
+            "name": "Python: maintain",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/manage.py",
+            "program": "${workspaceFolder}/maintain.py",
             "env": {
                 "INK_CONF_FILE": "${workspaceFolder}/var/settings.json"
-            }
+            },
+            "args": [
+                "mp"
+            ],
         },
         {
             "name": "Python: Current File",
