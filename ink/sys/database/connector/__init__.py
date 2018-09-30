@@ -15,6 +15,9 @@ class BaseConnector:
     def connect(self, connect_config: dict):
         pass
 
+    def close(self):
+        self.conn = None
+
     def __fetch(self, statement: str, fetch_type: int = FETCH_ALL) -> tuple:
         result = tuple()
         cursor = self.conn.cursor()

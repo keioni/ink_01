@@ -11,3 +11,7 @@ class MySQLConnector(BaseConnector):
         self.conn = mysql.connector.connect(**connect_config)
         self.conn.autocommit(False)
         super().connect(connect_config)
+
+    def close(self):
+        self.conn.close()
+        super().close()

@@ -13,7 +13,7 @@
                 "INK_CONF_FILE": "${workspaceFolder}/var/settings.json"
             },
             "args": [
-                "t_dbm"
+                "debug",
             ],
         },
         {
