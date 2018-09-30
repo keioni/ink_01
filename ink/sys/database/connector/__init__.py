@@ -2,10 +2,12 @@
 
 from typing import Union
 
+
 FETCH_ALL = 0
 FETCH_ONE = 1
 
-class Connector:
+
+class BaseConnector:
 
     def __init__(self):
         self.conn = None

@@ -2,10 +2,10 @@
 
 import mysql.connector
 
-from ink.sys.database.connector import Connector
+from ink.sys.database.connector import BaseConnector
 
 
-class MySQLConnector(Connector):
+class MySQLConnector(BaseConnector):
 
     def connect(self, connect_config: dict):
         self.conn = mysql.connector.connect(**connect_config)
