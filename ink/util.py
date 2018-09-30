@@ -11,8 +11,8 @@ from base64 import b64encode
 import mysql.connector
 
 from ink.sys.config import CONF
-from ink.sys.database.dbms.mysql import MySQLConnector
-from ink.sys.database.dbms.null import NullConnector
+# from ink.sys.database.connector.mysql import MySQLConnector
+# from ink.sys.database.connector.null import NullConnector
 
 
 def vp(msg: str):

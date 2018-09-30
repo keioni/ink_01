@@ -7,8 +7,8 @@ import hashlib
 
 import ink.util
 from ink.sys.config import CONF
-from ink.sys.database.dbms.mysql import MySQLConnector
-from ink.sys.database.dbms.null import NullConnector
+from ink.sys.database.connector.mysql import MySQLConnector
+from ink.sys.database.connector.null import NullConnector
 
 
 def mp():
