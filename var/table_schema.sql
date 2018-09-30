@@ -1,4 +1,3 @@
-
 create table tokens (
     rowid integer auto_increment,
     token bigint,
@@ -17,7 +16,6 @@ create table users (
 )
 ;
 
--- select * from boxes where user_id=$UID
 create table boxes (
     box_id integer auto_increment,
     user_id integer,
@@ -29,8 +27,6 @@ create table boxes (
 )
 ;
 
--- select * from cards where user_id=$UID
--- select * from cards where user_id=$UID and box_id=$BID
 create table cards (
     card_id integer auto_increment,
     box_id integer,
@@ -44,7 +40,6 @@ create table cards (
 )
 ;
 
--- select record from records where card_id=$CID
 create table records (
     rowid integer auto_increment,
     card_id integer,

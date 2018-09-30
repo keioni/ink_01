@@ -11,38 +11,56 @@ from ink.sys.database.connector.mysql import MySQLConnector
 from ink.sys.database.connector.null import NullConnector
 
 
+def _get_db_connector(mode: str = 'dry'):
+    if mode == 'dry':
+        db_connector = NullConnector()
+    else:
+        db_connector =  MySQLConnector()
+    db_connector.connect(CONF.database.connect_config)
+    return db_connector
+
+
 def mp():
+    conf_file = pickle_file = ''
+    if len(args) > 1:
+        conf_file = args[1]
+    if len(args) > 2:
+        pickle_file = args[2]
     print('>> Pickle Maker starting...')
-    ink.util.make_pickle(args.get(0), args.get(1))
+    ink.util.make_pickle(conf_file, pickle_file)
     print('>> Pickle Maker finished.')
 
 def dbm():
-    if args.get(0, 'dry') == 'run':
-        db_connector =  MySQLConnector()
-    else:
-        db_connector = NullConnector()
-    db_connector.connect(CONF.database.connect_config)
+    db_connector = _get_db_connector()
     dbm = ink.util.DBMaintainer(db_connector)
-    tables = dbm.get_defined_tables()
-    cmd = args.get(1, 's')
-    if cmd == 's':
-        print(json.dumps(tables, indent=4))
-    elif cmd == 'c':
-        dbm.create_tables()
-    elif cmd == 'd':
-        dbm.destroy_tables()
+    if len(args) > 1:
+        subcmd = args[1]
+        if subcmd == 's':
+            tables = dbm.get_defined_tables()
+            print(json.dumps(tables, indent=4))
+        elif subcmd == 'c':
+            dbm.create_tables()
+        elif subcmd == 'd':
+            dbm.destroy_tables()
 
 def t_dbm():
-    if args.get(1, 'dry') == 'run':
-        db_connector =  MySQLConnector()
-    else:
-        db_connector = NullConnector()
-    db_connector.connect(CONF.database.connect_config)
+    db_connector = _get_db_connector()
     dbm = ink.util.DBMaintainer(db_connector)
     tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
     tables2 = dbm.get_defined_tables('tests/test_table_schema2.sql')
     print(json.dumps(tables1, indent=4))
     print(json.dumps(tables2, indent=4))
+
+def dbrs():
+    name = ''
+    arg = ''
+    if len(args) > 1:
+        name = args[1]
+    if len(args) > 2:
+        arg = args[2]
+    db_connector = _get_db_connector()
+    dbm = ink.util.DBMaintainer(db_connector)
+    dbm.get_statement(name, arg)
 
 def cc():
     print(CONF)
@@ -53,13 +71,11 @@ def cc():
 CONF.load()
 progname = sys.argv.pop(0)
 cmd = sys.argv[0]
-args = dict()
-for i in range(len(sys.argv)):
-    args[i] = sys.argv[i]
+args = sys.argv
 
 if cmd == 'debug':
     cmd = ''
-    args = {1: '', 2: '', 3: '', 4: ''}
+    args = []
 
 if cmd == 'mp':
     mp()
@@ -67,6 +83,8 @@ elif cmd == 'dbm':
     dbm()
 elif cmd == 't_dbm':
     t_dbm()
+elif cmd == 'dbrs':
+    dbrs()
 elif cmd == 'cc':
     cc()
 else:

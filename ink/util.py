@@ -70,6 +70,9 @@ class DBMaintainer:
                     lines.append(line)
         return tables
 
+    def get_statement(self, name: str, arg: str = '') -> str:
+        print(name)
+
     def create_tables(self, tables: dict = None) -> bool:
         if not tables:
             tables = self.get_defined_tables()
