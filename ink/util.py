@@ -11,7 +11,8 @@ from base64 import b64encode
 import mysql.connector
 
 from ink.sys.config import CONF
-from ink.sys.database import Connector
+from ink.sys.database.dbms.mariadb import MySQLConnector
+from ink.sys.database.dbms.null import NullConnector
 
 
 def vp(msg: str):
@@ -32,8 +33,7 @@ class DBMaintainer:
     '''
 
     def __init__(self, connector = None):
-        if not connector:
-            self.dbc = Connector(CONF.database.connect_string)
+        self.dbc = connector
 
     def get_defined_tables(self, schema_file: str = '') -> dict:
         tables = dict()

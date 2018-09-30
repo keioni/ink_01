@@ -7,14 +7,8 @@ import hashlib
 
 import ink.util
 from ink.sys.config import CONF
-from ink.sys.database import Connector
-
-
-class ConnectorMock:
-
-    def execute(self, statements: list):
-        for stmt in statements:
-            print('execute> ' + stmt )
+from ink.sys.database.dbms.mariadb import MySQLConnector
+from ink.sys.database.dbms.null import NullConnector
 
 
 def mp():
@@ -24,18 +18,20 @@ def mp():
 
 def dbm():
     if args.get(0, 'dry') == 'run':
-        db_connector = Connector(CONF.database.connect_config)
+        db_connector =  MySQLConnector()
+        db_connector.connect(CONF.database.connect_config)
     else:
-        db_connector = ConnectorMock()
+        db_connector = NullConnector()
     dbm = ink.util.DBMaintainer(db_connector)
     tables = dbm.get_defined_tables()
     print(json.dumps(tables, indent=4))
 
 def t_dbm():
     if args.get(0, 'dry') == 'run':
-        db_connector = Connector(CONF.database.connect_config)
+        db_connector =  MySQLConnector()
+        db_connector.connect(CONF.database.connect_config)
     else:
-        db_connector = ConnectorMock()
+        db_connector = NullConnector()
     dbm = ink.util.DBMaintainer(db_connector)
     tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
     tables2 = dbm.get_defined_tables('tests/test_table_schema2.sql')
