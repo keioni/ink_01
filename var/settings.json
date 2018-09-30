@@ -5,7 +5,7 @@
             "password_salt": "oajokkN6AkwZB4wA0XpFtzlJpYYTVB7a9JkjV56PMAs"
         },
         "database": {
-            "connect_string": {
+            "connect_config": {
                 "database": "ink",
                 "host": "ink.devel.keys.jp",
                 "port": 3306,

@@ -5,7 +5,6 @@ import sys
 import json
 import hashlib
 
-
 import ink.util
 from ink.sys.config import CONF
 from ink.sys.database import Connector
@@ -25,7 +24,7 @@ def mp():
 
 def dbm():
     if args.get(0, 'dry') == 'run':
-        db_connector = Connector(CONF.database.connect_string)
+        db_connector = Connector(CONF.database.connect_config)
     else:
         db_connector = ConnectorMock()
     dbm = ink.util.DBMaintainer(db_connector)
@@ -34,7 +33,7 @@ def dbm():
 
 def t_dbm():
     if args.get(0, 'dry') == 'run':
-        db_connector = Connector(CONF.database.connect_string)
+        db_connector = Connector(CONF.database.connect_config)
     else:
         db_connector = ConnectorMock()
     dbm = ink.util.DBMaintainer(db_connector)

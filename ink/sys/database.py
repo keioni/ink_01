@@ -5,8 +5,8 @@ import mysql.connector
 
 class Connector:
 
-    def __init__(self, db_connect_config: dict):
-        self.conn = mysql.connector.connect(**db_connect_config)
+    def __init__(self, connect_config: dict):
+        self.conn = mysql.connector.connect(**connect_config)
         self.conn.autocommit(False)
 
     def __fetch(self, statement: str, fetch_type: str = 'all') -> tuple:
@@ -43,5 +43,5 @@ class Connector:
         return result
 
 
-def connect(db_connect_config: dict):
-    return Connector(db_connect_config)
+def connect(connect_config: dict):
+    return Connector(connect_config)
