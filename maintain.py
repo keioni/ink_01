@@ -7,7 +7,7 @@ import hashlib
 
 import ink.util
 from ink.sys.config import CONF
-from ink.sys.database.dbms.mariadb import MySQLConnector
+from ink.sys.database.dbms.mysql import MySQLConnector
 from ink.sys.database.dbms.null import NullConnector
 
 

@@ -11,7 +11,7 @@ from base64 import b64encode
 import mysql.connector
 
 from ink.sys.config import CONF
-from ink.sys.database.dbms.mariadb import MySQLConnector
+from ink.sys.database.dbms.mysql import MySQLConnector
 from ink.sys.database.dbms.null import NullConnector
 
 
