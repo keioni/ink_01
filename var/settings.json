@@ -2,14 +2,14 @@
     "version": "1.0",
     "configurations": {
         "security": {
-            "password_salt": "oajokkN6AkwZB4wA0XpFtzlJpYYTVB7a9JkjV56PMAs"
+            "password_salt": "fill_fully_long_random_base64_string"
         },
         "database": {
             "connect_config": {
                 "database": "ink",
-                "host": "ink.devel.keys.jp",
+                "host": "db.ink.expample.com",
                 "port": 3306,
-                "user": "keys",
+                "user": "username",
                 "password": "password",
                 "ssl_ca": "./ssl/ca.pem",
                 "ssl_cert": "./ssl/cert.pem",
