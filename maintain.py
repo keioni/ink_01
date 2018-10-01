@@ -74,8 +74,8 @@ cmd = sys.argv[0]
 args = sys.argv
 
 if cmd == 'debug':
-    cmd = ''
-    args = []
+    cmd = 'dbm'
+    args = [cmd, 'c']
 
 if cmd == 'mp':
     mp()

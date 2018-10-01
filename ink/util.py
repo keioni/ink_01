@@ -40,34 +40,50 @@ class DBMaintainer:
         if not schema_file:
             schema_file = CONF.database.schema_file
         with open(schema_file, 'r') as fpr:
-            table_name = str()
+
+            # read schema file and split to statement blocks
             lines = list()
             for line in fpr:
-                # remove comment
                 comment_start = line.find('--')
                 if comment_start >= 0:
-                    line = line[:comment_start].strip()
-                line = line.strip()
+                    line = line[:comment_start]
+                lines.append(line.strip())
+            statements = ''.join(lines).split(';')
 
-                # check blank line or not.
-                if line == '':
-                    if table_name:
-                        # end of table definition.
-                        tables[table_name] = ''.join(lines)
-                        lines.clear()
-                        table_name = ''
-                    continue
-                else:
-                    # start of table definition
-                    stmt_begin = re.match(r'create table (\w+)', line)
-                    if stmt_begin:
-                        # if table_name:
-                        #     tables[table_name] = ' '.join(lines)
-                        #     lines.clear()
-                        table_name = stmt_begin.group(1)
+            # picking up table schemas
+            for statement in statements:
+                match = re.search(r'create table (\w+)', statement)
+                if match:
+                    tables[match.group(1)] = statement
 
-                if table_name:
-                    lines.append(line)
+            # table_name = str()
+            # lines = list()
+            # for line in fpr:
+            #     # remove comment
+            #     comment_start = line.find('--')
+            #     if comment_start >= 0:
+            #         line = line[:comment_start].strip()
+            #     line = line.strip()
+
+            #     # check blank line or not.
+            #     if line == '':
+            #         if table_name:
+            #             # end of table definition.
+            #             tables[table_name] = ''.join(lines)
+            #             lines.clear()
+            #             table_name = ''
+            #         continue
+            #     else:
+            #         # start of table definition
+            #         stmt_begin = re.match(r'create table (\w+)', line)
+            #         if stmt_begin:
+            #             # if table_name:
+            #             #     tables[table_name] = ' '.join(lines)
+            #             #     lines.clear()
+            #             table_name = stmt_begin.group(1)
+
+            #     if table_name:
+            #         lines.append(line)
         return tables
 
     def get_statement(self, name: str, arg: str = '') -> str:
