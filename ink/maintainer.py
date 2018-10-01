@@ -13,7 +13,7 @@ import re
 from ink.sys.config import CONF
 
 
-class DBMaintainer:
+class DatabaseMaintainer:
     '''
     Database Maintainer
 

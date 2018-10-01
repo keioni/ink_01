@@ -4,7 +4,7 @@
 import sys
 import json
 
-import ink.util
+from ink.maintainer import make_pickle, DatabaseMaintainer
 from ink.sys.config import CONF
 from ink.sys.database.connector.mysql import MySQLConnector
 from ink.sys.database.connector.null import NullConnector
@@ -26,12 +26,12 @@ def cmd_mp():
     if len(args) > 2:
         pickle_file = args[2]
     print('>> Pickle Maker starting...')
-    ink.util.make_pickle(conf_file, pickle_file)
+    make_pickle(conf_file, pickle_file)
     print('>> Pickle Maker finished.')
 
 def cmd_dbm():
     db_connector = _get_db_connector()
-    dbman = ink.util.DBMaintainer(db_connector)
+    dbman = DatabaseMaintainer(db_connector)
     if len(args) > 1:
         subcmd = args[1]
         if subcmd == 's':
@@ -44,7 +44,7 @@ def cmd_dbm():
 
 def cmd_t_dbm():
     db_connector = _get_db_connector()
-    dbman = ink.util.DBMaintainer(db_connector)
+    dbman = DatabaseMaintainer(db_connector)
     tables1 = dbman.get_defined_tables('tests/test_table_schema1.sql')
     tables2 = dbman.get_defined_tables('tests/test_table_schema2.sql')
     print(json.dumps(tables1, indent=4))
@@ -58,7 +58,7 @@ def cmd_dbrs():
     if len(args) > 2:
         arg = args[2]
     db_connector = _get_db_connector()
-    dbman = ink.util.DBMaintainer(db_connector)
+    dbman = DatabaseMaintainer(db_connector)
     dbman.get_statement(name, arg)
 
 def cmd_cc():
