@@ -101,7 +101,7 @@ def make_pickle(conf_file: str = '', pickle_file: str = ''):
     Pickle Maker
 
     Convert raw, readable, and formatted config file (json) to
-    Python independed 'pickle' file.
+    Python depended 'pickle' file.
     '''
 
     # get source file name (.json)
