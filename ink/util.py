@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from base64 import b64encode
+import hashlib
+import json
 import os
 import pickle
-import json
-import sys
 import re
-import hashlib
-from base64 import b64encode
+import sys
 
 import mysql.connector
 
