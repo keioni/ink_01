@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from ink.sys.config import conf
-import ink.sys.database
+from ink.sys.config import CONF
+from ink.sys.database.connector.mysql import MySQLConnector
+
 
 class Records:
 
     def __init__(self):
-        self.dbc = ink.sys.database.connect()
+        self.dbc = MySQLConnector()
 
     def get_boxes(self, user_id: str) -> tuple:
         sql_stmt = '''

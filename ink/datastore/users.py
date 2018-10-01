@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from ink.util.security import secure_hashing
-from ink.sys.config import conf
-import ink.sys.database
+from ink.util import secure_hash
+from ink.sys.config import CONF
+from ink.sys.database.connector.mysql import MySQLConnector
 
 
 class Users:
 
     def __init__(self):
-        self.dbc = ink.sys.database.connect()
+        self.dbc = MySQLConnector()
         self.salt = 'hoge' # XXX
 
     def get_uid(self, username: str) -> int:
@@ -45,7 +45,7 @@ class Users:
             select password from users where username = '?'
         '''
         stored_password = ''
-        input_password = secure_hashing(password, self.salt)
+        input_password = secure_hash(password, self.salt)
         statement = (sql_stmt, (username))
         row = self.dbc.fetchone(statement)
         if row:

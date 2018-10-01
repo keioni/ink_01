@@ -5,7 +5,7 @@
     "python.unitTest.pyTestArgs": [ "-v" ],
     "python.autoComplete.addBrackets": true,
     "python.autoComplete.showAdvancedMembers": true,
-    "python.linting.pylintUseMinimalCheckers": true,
+    "python.linting.pylintUseMinimalCheckers": false,
     "python.jediEnabled": true,
     "python.jediPath": "C:\\Users\\Keys\\AppData\\Local\\Jedi",
     "editor.wordWrap": "on",

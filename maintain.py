@@ -3,7 +3,6 @@
 
 import sys
 import json
-import hashlib
 
 import ink.util
 from ink.sys.config import CONF
@@ -15,12 +14,12 @@ def _get_db_connector(mode: str = 'dry'):
     if mode == 'dry':
         db_connector = NullConnector()
     else:
-        db_connector =  MySQLConnector()
+        db_connector = MySQLConnector()
     db_connector.connect(CONF.database.connect_config)
     return db_connector
 
 
-def mp():
+def cmd_mp():
     conf_file = pickle_file = ''
     if len(args) > 1:
         conf_file = args[1]
@@ -30,28 +29,28 @@ def mp():
     ink.util.make_pickle(conf_file, pickle_file)
     print('>> Pickle Maker finished.')
 
-def dbm():
+def cmd_dbm():
     db_connector = _get_db_connector()
-    dbm = ink.util.DBMaintainer(db_connector)
+    dbman = ink.util.DBMaintainer(db_connector)
     if len(args) > 1:
         subcmd = args[1]
         if subcmd == 's':
-            tables = dbm.get_defined_tables()
+            tables = dbman.get_defined_tables()
             print(json.dumps(tables, indent=4))
         elif subcmd == 'c':
-            dbm.create_tables()
+            dbman.create_tables()
         elif subcmd == 'd':
-            dbm.destroy_tables()
+            dbman.destroy_tables()
 
-def t_dbm():
+def cmd_t_dbm():
     db_connector = _get_db_connector()
-    dbm = ink.util.DBMaintainer(db_connector)
-    tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
-    tables2 = dbm.get_defined_tables('tests/test_table_schema2.sql')
+    dbman = ink.util.DBMaintainer(db_connector)
+    tables1 = dbman.get_defined_tables('tests/test_table_schema1.sql')
+    tables2 = dbman.get_defined_tables('tests/test_table_schema2.sql')
     print(json.dumps(tables1, indent=4))
     print(json.dumps(tables2, indent=4))
 
-def dbrs():
+def cmd_dbrs():
     name = ''
     arg = ''
     if len(args) > 1:
@@ -59,10 +58,10 @@ def dbrs():
     if len(args) > 2:
         arg = args[2]
     db_connector = _get_db_connector()
-    dbm = ink.util.DBMaintainer(db_connector)
-    dbm.get_statement(name, arg)
+    dbman = ink.util.DBMaintainer(db_connector)
+    dbman.get_statement(name, arg)
 
-def cc():
+def cmd_cc():
     print(CONF)
     print(CONF.database)
     print(CONF.database.connect_string.host)
@@ -78,14 +77,14 @@ if cmd == 'debug':
     args = [cmd, 'c']
 
 if cmd == 'mp':
-    mp()
+    cmd_mp()
 elif cmd == 'dbm':
-    dbm()
+    cmd_dbm()
 elif cmd == 't_dbm':
-    t_dbm()
+    cmd_t_dbm()
 elif cmd == 'dbrs':
-    dbrs()
+    cmd_dbrs()
 elif cmd == 'cc':
-    cc()
+    cmd_cc()
 else:
     print('Bad command: {}'.format(cmd))

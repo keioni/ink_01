@@ -17,4 +17,4 @@ class NullConnector(BaseConnector):
         if isinstance(statements, str):
             statements = [statements]
         for stmt in statements:
-            print('execute> ' + stmt )
+            print('execute> ' + stmt)

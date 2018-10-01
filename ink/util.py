@@ -8,7 +8,7 @@ import pickle
 import re
 import sys
 
-import mysql.connector
+# import mysql.connector
 
 from ink.sys.config import CONF
 # from ink.sys.database.connector.mysql import MySQLConnector
@@ -32,7 +32,7 @@ class DBMaintainer:
     INK System Database Maintainer
     '''
 
-    def __init__(self, connector = None):
+    def __init__(self, connector=None):
         self.dbc = connector
 
     def get_defined_tables(self, schema_file: str = '') -> dict:
@@ -87,7 +87,7 @@ class DBMaintainer:
         return tables
 
     def get_statement(self, name: str, arg: str = '') -> str:
-        print(name)
+        print(name + arg)
 
     def create_tables(self, tables: dict = None) -> bool:
         if not tables:
@@ -118,8 +118,8 @@ def make_pickle(conf_file: str = '', pickle_file: str = ''):
         if 'INK_CONF_FILE' in os.environ:
             conf_file = os.environ.get('INK_CONF_FILE')
         else:
-            d = os.path.dirname(__file__)
-            conf_file = os.path.abspath(d + '/../var/settings.json')
+            this_path = os.path.dirname(__file__)
+            conf_file = os.path.abspath(this_path + '/../var/settings.json')
 
     # get destination file name (.pickle)
     if not pickle_file:
@@ -144,6 +144,6 @@ def secure_hash(value: str, salt: str) -> str:
 
     salt = salt.encode('utf-8')
     # https://github.com/PyCQA/pylint/issues/2478
-    h = hashlib.blake2b(key=salt, digest_size=32) # pylint: disable=E1123
-    h.update(value.encode('utf-8'))
-    return b64encode(h.digest()).decode()
+    hashobj = hashlib.blake2b(key=salt, digest_size=32) # pylint: disable=E1123
+    hashobj.update(value.encode('utf-8'))
+    return b64encode(hashobj.digest()).decode()
