@@ -3,18 +3,13 @@
 import hashlib
 import json
 
-import ink.util
-
-class ConnectorMock:
-
-    def execute(self, statements: list):
-        for stmt in statements:
-            print('execute> ' + stmt )
+from ink.maintainer import DatabaseMaintainer
+from ink.sys.database.connector.null import NullConnector
 
 
 def test_read_sql_file():
-    db_connector = ConnectorMock()
-    dbm = ink.util.DBMaintainer(db_connector)
+    db_connector = NullConnector()
+    dbm = DatabaseMaintainer(db_connector)
     tables1 = dbm.get_defined_tables('tests/test_table_schema1.sql')
     tables2 = dbm.get_defined_tables('tests/test_table_schema2.sql')
 
