@@ -9,7 +9,7 @@ import sys
 from ink.sys.config import CONF
 
 
-def vp(msg: str):
+def verbose_print(msg: str):
     '''
     Verbose Printer.
 
