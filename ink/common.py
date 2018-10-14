@@ -37,6 +37,7 @@ def secure_hash(value: str, salt: str) -> str:
 
     salt = salt.encode('utf-8')
     # https://github.com/PyCQA/pylint/issues/2478
+    # https://github.com/PyCQA/pylint/issues/2551
     hashobj = hashlib.blake2b(key=salt, digest_size=32) # pylint: disable=E1123
     hashobj.update(value.encode('utf-8'))
     return b64encode(hashobj.digest()).decode()
