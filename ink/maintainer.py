@@ -9,9 +9,12 @@ import json
 import os
 import pickle
 import re
+import logging
 
 from ink.sys.config import CONF
 
+
+logger = logging.getLogger(__name__)
 
 class DatabaseMaintainer:
     '''
