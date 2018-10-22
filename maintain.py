@@ -68,10 +68,9 @@ def cmd_cc():
 
 
 CONF.load()
-progname = sys.argv.pop(0)
-cmd = sys.argv[0]
-args = sys.argv
 
+cmd = sys.argv[1]
+args = sys.argv[1:]
 if cmd == 'debug':
     cmd = 'dbm'
     args = [cmd, 'c']
