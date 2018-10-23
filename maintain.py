@@ -11,7 +11,7 @@ from ink.sys.database.connector.null import NullConnector
 
 
 def _get_db_connector(dry_run: bool = False):
-    if dry_run == True:
+    if dry_run:
         db_connector = NullConnector()
     else:
         db_connector = MySQLConnector()
