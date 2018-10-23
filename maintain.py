@@ -18,9 +18,9 @@ def _get_db_connector(dry_run: bool = False):
     db_connector.connect(CONF.database.connect_config)
     return db_connector
 
-
 def cmd_mp():
-    conf_file = pickle_file = ''
+    conf_file = ''
+    pickle_file = ''
     if len(args) > 1:
         conf_file = args[1]
     if len(args) > 2:
