@@ -10,8 +10,8 @@ from ink.sys.database.connector.mysql import MySQLConnector
 from ink.sys.database.connector.null import NullConnector
 
 
-def _get_db_connector(mode: str = 'dry'):
-    if mode == 'dry':
+def _get_db_connector(dry_run: bool = False):
+    if dry_run == True:
         db_connector = NullConnector()
     else:
         db_connector = MySQLConnector()
@@ -30,7 +30,7 @@ def cmd_mp():
     print('>> Pickle Maker finished.')
 
 def cmd_dbm():
-    db_connector = _get_db_connector()
+    db_connector = _get_db_connector(True)
     dbman = DatabaseMaintainer(db_connector)
     if len(args) > 1:
         subcmd = args[1]
