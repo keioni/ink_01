@@ -17,8 +17,12 @@ For example:
 import os
 import json
 import pickle
+import logging
 
 from attrdict import AttrDict
+
+
+logger = logging.getLogger(__name__)
 
 
 class Configure:
