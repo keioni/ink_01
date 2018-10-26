@@ -48,7 +48,7 @@ class BaseConnector:
                 self.conn.commit()
                 result = True
             # except mysql.connector.Error:
-            except:
+            except():
                 self.conn.rollback()
             finally:
                 cursor.close()

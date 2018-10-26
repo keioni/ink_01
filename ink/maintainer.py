@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-'''INK system maintainer module.
+"""INK system maintainer module.
 
 There classes are used from the maintainer program only.
 Don't make instance in system's body.
-'''
+"""
 
 import json
 import os
@@ -16,14 +16,15 @@ from ink.sys.config import CONF
 
 logger = logging.getLogger(__name__)
 
+
 class DatabaseMaintainer:
-    '''
+    """
     Database Maintainer
 
     Used only from maintain.py.
     You can create, drop, modify, and other operations through
     this class.
-    '''
+    """
 
     def __init__(self, connector=None):
         self.dbc = connector
@@ -80,7 +81,7 @@ class DatabaseMaintainer:
         return tables
 
     def get_statement(self, name: str, arg: str = '') -> str:
-        print(name + arg)
+        return name + arg
 
     def create_tables(self, tables: dict = None) -> bool:
         if not tables:
@@ -100,12 +101,12 @@ class DatabaseMaintainer:
 
 
 def make_pickle(conf_file: str = '', pickle_file: str = ''):
-    '''
+    """
     Pickle Maker
 
     Convert raw, readable, and formatted config file (json) to
     Python depended 'pickle' file.
-    '''
+    """
 
     # get source file name (.json)
     if not conf_file:

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''INK system configuration module.
+"""INK system configuration module.
 
 This module is used to customizing INK system settings.
 When you want to access any settings, you must use
@@ -11,7 +11,7 @@ For example:
 
     CONF.load(path_to_setting_file)
     some_instance.do_something(CONF.toplevel.secondlevel)
-'''
+"""
 
 
 import os
@@ -26,10 +26,10 @@ logger = logging.getLogger(__name__)
 
 
 class Configure:
-    '''INK system configuration manager.
+    """INK system configuration manager.
 
     How to use this class, see module docstring.
-    '''
+    """
     CONF_TREE_TOP_NAME = 'configurations'
 
     # def __init__(self, conf_dict: dict = None):
@@ -62,15 +62,14 @@ class Configure:
                 raise AttributeError(msg)
         return self.__conf_parts[name]
 
-    def __validate_conf_dict(self, conf: dict) -> bool:
+    def _validate_conf_dict(self, conf: dict) -> bool:
         if conf.get('version') != '1.0':
             return False
         if self.CONF_TREE_TOP_NAME not in conf:
             return False
         return True
 
-    def __get_conf_filename(self) -> str:
-        conf_file = ''
+    def _get_conf_filename(self) -> str:
         if 'INK_CONF_FILE' in os.environ:
             conf_file = os.environ.get('INK_CONF_FILE')
         else:
@@ -87,7 +86,7 @@ class Configure:
     #         self.__conf = pickle.load(fpr)
 
     def load(self, conf_file: str = '', use_pickle: bool = True) -> bool:
-        '''load json format setting file.
+        """load json format setting file.
 
         Arguments:
             * conf_file {str} -- file name of the setting file.
@@ -100,10 +99,10 @@ class Configure:
             Return {True} when settings is loaded successfully.
             This method raise ValueError exception instead of
             returning {False}. So use try-except.
-        '''
+        """
 
         if not conf_file:
-            conf_file = self.__get_conf_filename()
+            conf_file = self._get_conf_filename()
             if not conf_file:
                 msg = 'Cannot load default settings. Retry with filename.'
                 raise ValueError(msg)
@@ -116,7 +115,7 @@ class Configure:
         if not conf:
             msg = 'Cannot load settings from: ' + conf_file
             raise ValueError(msg)
-        if not self.__validate_conf_dict(conf):
+        if not self._validate_conf_dict(conf):
             msg = 'Invalid format file: ' + conf_file
             raise ValueError(msg)
         self.__conf = conf

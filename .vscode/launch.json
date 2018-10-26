@@ -13,8 +13,8 @@
                 "INK_CONF_FILE": "${workspaceFolder}/var/settings.json"
             },
             "args": [
-                "debug",
-            ],
+                "debug"
+            ]
         },
         {
             "name": "Python: Current File",

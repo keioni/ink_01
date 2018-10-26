@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import hashlib
-import json
 
 from ink.maintainer import DatabaseMaintainer
 from ink.sys.database.connector.null import NullConnector

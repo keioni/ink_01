@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from ink.util import secure_hash
-from ink.sys.config import CONF
+from ink.common import secure_hash
+# from ink.sys.config import CONF
 from ink.sys.database.connector.mysql import MySQLConnector
 
 
@@ -9,7 +9,7 @@ class Users:
 
     def __init__(self):
         self.dbc = MySQLConnector()
-        self.salt = 'hoge' # XXX
+        self.salt = 'hoge'  # XXX
 
     def get_uid(self, username: str) -> int:
         sql_stmt = '''

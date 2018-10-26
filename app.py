@@ -13,9 +13,11 @@ from flask import request, redirect
 app = Flask(__name__)
 app.config.from_envvar('FLASK_SETTINGS', silent=True)
 
+
 @app.route('/')
 def path_route():
     return redirect('https://ink.keys.jp/api/')
+
 
 @app.route('/token', methods=['POST', 'DELETE'])
 def path_token():
@@ -26,13 +28,16 @@ def path_token():
     elif request.method == 'DELETE':
         pass
 
+
 @app.route('/boxes', methods=['GET', 'POST', 'DELETE'])
 def path_boxes():
     pass
 
+
 @app.route('/cards', methods=['GET', 'POST', 'DELETE'])
 def path_cards():
     pass
+
 
 @app.route('/cards/<int:card_id>/records', methods=['GET', 'POST', 'DELETE'])
 def path_records(card_id: int):
