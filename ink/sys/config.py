@@ -136,4 +136,4 @@ class Configure:
         return conf
 
 
-CONF = Configure()
+CONF: Configure = Configure()

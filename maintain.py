@@ -18,6 +18,7 @@ def _get_db_connector(dry_run: bool = False):
     db_connector.connect(CONF.database.connect_config)
     return db_connector
 
+
 def cmd_mp():
     conf_file = ''
     pickle_file = ''
@@ -28,6 +29,7 @@ def cmd_mp():
     print('>> Pickle Maker starting...')
     make_pickle(conf_file, pickle_file)
     print('>> Pickle Maker finished.')
+
 
 def cmd_dbm():
     db_connector = _get_db_connector(True)
@@ -42,6 +44,7 @@ def cmd_dbm():
         elif subcmd == 'd':
             dbman.destroy_tables()
 
+
 def cmd_t_dbm():
     db_connector = _get_db_connector()
     dbman = DatabaseMaintainer(db_connector)
@@ -49,6 +52,7 @@ def cmd_t_dbm():
     tables2 = dbman.get_defined_tables('tests/test_table_schema2.sql')
     print(json.dumps(tables1, indent=4))
     print(json.dumps(tables2, indent=4))
+
 
 def cmd_dbrs():
     name = ''
@@ -60,6 +64,7 @@ def cmd_dbrs():
     db_connector = _get_db_connector()
     dbman = DatabaseMaintainer(db_connector)
     dbman.get_statement(name, arg)
+
 
 def cmd_cc():
     print(CONF)
